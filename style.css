@@ -1,0 +1,38 @@
+*, *:before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+html {
+    box-sizing: border-box;
+    background-color: rgb(27, 27, 27);
+}
+#container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+  }
+.cell {
+    border: 1px solid rgb(78, 78, 78);
+    min-width: 20px;
+    min-height: 20px;
+    display: inline-block;
+    margin-right: 2px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

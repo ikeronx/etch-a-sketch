@@ -1,4 +1,4 @@
-# JS-Etch-a-Sketch
+# JS Etch-a-Sketch
 
 This is a Javascript project from The Odin Project. The instructions are:
 

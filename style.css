@@ -1,27 +1,30 @@
+:root {
+  --grid-cols: 1;
+  --grid-rows: 1;
+}
+
 *, *:before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: inherit;
 }
+
 html {
     box-sizing: border-box;
     background-color:  #181818;
     font-family: 'bilbo swash caps';
+    /*footer support*/
+    position: relative;
+    min-height: 100%;
 }
-:root {
-    --grid-cols: 1;
-    --grid-rows: 1;
-  }
-.grid-layout{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%
-    height: 100vh;
-    margin-top: 50px;
-    
+
+body{
+  /* footer support  */
+  margin-bottom: 30px;
 }
+
+/* HEADER  */
+
 .header{
   position: relative;
   margin-bottom: 20px;
@@ -32,6 +35,19 @@ html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Bilbo Swash Caps', cursive;
+}
+
+/* MAIN */
+
+.grid-layout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%
+    height: 100vh;
+    margin-top: 30px;
+    
 }
   #container {
     display: grid;
@@ -70,13 +86,21 @@ html {
   box-shadow: 5px 5px 10px  rgba(255, 255, 255, 1), inset -5px -5px -10px  rgba(0, 0, 0, 0.25) ;
 }
 
+/* FOOTER */
 
-
-
-
-
-
-
-
-
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 0.5em;
+  color: rgba(255, 255, 255, 0.479);
+  opacity: 1.5em;
+  font-family: roboto, arial, helvetica, sans-serif;
+}
 

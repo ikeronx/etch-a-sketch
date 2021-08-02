@@ -4,7 +4,7 @@ const btnWhite = document.getElementById("btnWhite");
 const btnGrayScale = document.getElementById("btnGrayScale");
 const btnRainbow = document.getElementById("btnRainbow");
 const btnEraser = document.getElementById("btnEraser");
-const btnReset = document.getElementById("btnReset");
+const btnResize = document.getElementById("btnResize");
 const btnClear = document.getElementById("btnClear")
 
 //grid layout
@@ -70,23 +70,19 @@ const eraserButton = function() {
 }
 eraserButton()
 
-//resets grid..
+//removes grid ..
 const resetGrid = function () {
     let boxs = container.querySelectorAll('.box')
     boxs.forEach(box => box.remove()) // <--remove the entire grid
 }
 //...resizes the grid based on user's input
 const reSizeGrid = function () {
-    btnReset.addEventListener('click', () => {
+    btnResize.addEventListener('click', () => {
         let user = prompt(("How many squares per side? (1-50)"));
-        if (user === null || user < 1 || user > 51 || !Number.isInteger(+user)) {
-            resetGrid();
-            createGrid(16, 16);
-            whiteButton()
-            rainbowColorButton() 
-            grayScaleButton()
-            eraserButton()
-            clearGrid()
+        if (user === null || !Number.isInteger(+user)) {
+            alert("ERROR: Input must be an integer between 1 and 100. Try again");
+        } else if (user < 1 || user > 51) {
+            alert("ERROR: Number out of range. Try again.");
         } else {
             resetGrid();
             createGrid(user, user);
@@ -100,7 +96,7 @@ const reSizeGrid = function () {
 } 
 reSizeGrid()
 
-//clears grid
+//resets / clears grid
 const clearGrid = function () {
     btnClear.addEventListener('click', () => {
             resetGrid();
@@ -122,3 +118,4 @@ window.onload = () => {
     })
     );
 };
+

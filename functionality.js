@@ -1,52 +1,124 @@
 //Sets important constants and variables
-const container = document.getElementById('container');
-let rows = document.getElementsByClassName('gridRow');
-let cells = document.getElementsByClassName('cell')
+const container = document.getElementById("container");
+const btnWhite = document.getElementById("btnWhite");
+const btnGrayScale = document.getElementById("btnGrayScale");
+const btnRainbow = document.getElementById("btnRainbow");
+const btnEraser = document.getElementById("btnEraser");
+const btnReset = document.getElementById("btnReset");
+const btnClear = document.getElementById("btnClear")
 
-defaultGrid();
-//creates a default grid sized 16x16
-function defaultGrid() {
-    makeRows(16);
-    makeColumns(16);
+//grid layout
+//creates a 16x16 grid 
+const createGrid = function(rows, cols) {
+  for (c = 0; c < (rows * cols); c++) {
+      let cell = document.createElement("div");
+      container.style.setProperty('--grid-rows', rows);
+      container.style.setProperty('--grid-cols', cols);
+      container.appendChild(cell).className = "box";
+  };
+};
+createGrid(16, 16);
+
+//hover effect that changes the color of the grid
+const whiteButton = function() {
+    let boxs = container.querySelectorAll('.box');
+    btnWhite.addEventListener('click', () => {
+        boxs.forEach(box => box.addEventListener('mouseover', (e) => {
+            e.target.style.background = 'white';
+        })
+        );
+    });
+};
+whiteButton()
+
+//gray scale hover effect
+const grayScaleButton = function() {
+    let boxs = container.querySelectorAll('.box');
+    btnGrayScale.addEventListener('click', () => {
+        boxs.forEach(box => box.addEventListener('mouseover', (e) => {
+            let rNum = Math.floor(Math.random() * 127)
+            e.target.style.background = `rgb(${rNum},${rNum},${rNum})`;
+        })
+        );
+    });
+};
+grayScaleButton()
+
+//rainbow hover effect
+const rainbowColorButton = function() {
+    let boxs = container.querySelectorAll('.box')
+    btnRainbow.addEventListener('click', () => {
+        boxs.forEach(box => box.addEventListener('mouseover', (e) => {
+            const rNumR = Math.floor(Math.random() * 256)
+            const rNumG = Math.floor(Math.random() * 256)
+            const rNumB = Math.floor(Math.random() * 256)
+            e.target.style.background = `rgb(${rNumR},${rNumG},${rNumB})`;
+        })
+        );
+    });
 }
+rainbowColorButton() 
 
-//Takes (rows, columns) input and makes a grid
-function makeRows(rowNum) {
-    //create rows
-    for (let r = 0; r < rowNum; r++) {
-        let row = document.createElement('div');
-        container.appendChild(row).className = 'gridRow';
-    };
+//eraser button
+const eraserButton = function() {
+    let boxs = container.querySelectorAll('.box')
+    btnEraser.addEventListener('click', () => {
+        boxs.forEach(box => box.addEventListener('mouseover', (e) => {
+            e.target.style.background = '#121212'
+        }))
+    })
+}
+eraserButton()
+
+//resets grid..
+const resetGrid = function () {
+    let boxs = container.querySelectorAll('.box')
+    boxs.forEach(box => box.remove()) // <--remove the entire grid
+}
+//...resizes the grid based on user's input
+const reSizeGrid = function () {
+    btnReset.addEventListener('click', () => {
+        let user = prompt(("How many squares per side? (1-50)"));
+        if (user === null || user < 1 || user > 51 || !Number.isInteger(+user)) {
+            resetGrid();
+            createGrid(16, 16);
+            whiteButton()
+            rainbowColorButton() 
+            grayScaleButton()
+            eraserButton()
+            clearGrid()
+        } else {
+            resetGrid();
+            createGrid(user, user);
+            whiteButton()
+            rainbowColorButton() 
+            grayScaleButton()
+            eraserButton()
+            clearGrid()
+        }
+    })
+} 
+reSizeGrid()
+
+//clears grid
+const clearGrid = function () {
+    btnClear.addEventListener('click', () => {
+            resetGrid();
+            createGrid(16, 16);
+            whiteButton()
+            rainbowColorButton() 
+            grayScaleButton()
+            eraserButton()
+            clearGrid()
+    })
+} 
+clearGrid()
+
+//initializes hover effect on load
+window.onload = () => {
+    let boxs = container.querySelectorAll('.box');
+    boxs.forEach(box => box.addEventListener('mouseover', (e) => {
+        e.target.style.background = 'white';
+    })
+    );
 };
-
-//creates columns
-function makeColumns(cellNum) {
-    for (i = 0; i < rows.length; i++) {
-        for (j = 0; j < cellNum; j++) {
-            let newCell = document.createElement('div');
-            rows[j].appendChild(newCell).className = 'cell'
-        };
-    };
-};
-
-
-
-console.log(container)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
